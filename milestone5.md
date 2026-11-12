@@ -1,10 +1,11 @@
 # Quantitative Analysis
 
-For each model, we looked at accuracy, precision, recall, and Macro-F1. For each class, we looked at precision, recall, and F1 as well.    
+For each model, we looked at accuracy, precision, recall, and Macro-F1. For each class, we looked at precision, recall, and F1 as well. Lastly, a confusion matrix is included for each model.
 
 * **Accuracy** was selected as a big-picture measure of performance.
 * **Macro-F1** was selected as an overview of per-class F1 scores for a balanced look at how the models perform in terms of precision and recall. **F1** was also calculated for each class for a more individual look at what classes the models perform better at.
 * **Precision and recall** were selected to get a better idea of what types of error each model tends to produce. These were looked at both on average and for individual classes for a closer look.
+* **Confusion matrices** were added to give a visual representation of the types of errors the models tend towards.
 
 
 ### For the non-truncated TF-IDF Logistic Regression model:
@@ -23,11 +24,13 @@ For each model, we looked at accuracy, precision, recall, and Macro-F1. For each
 | ai_generated | 0.9144 | 0.9555 | 0.9345 |
 | ai_refined | 0.8563 | 0.7450 | 0.7968  |
 
-
+#### Confusion Matrix:
 
 ![Confusion Matrix](/images/confmatrix_tf-idfbaseline.png)
 
-* Brief 
+#### Notes
+
+*  
 
 ### For the truncated TF-IDF Logistic Regression model:
 
@@ -45,9 +48,13 @@ For each model, we looked at accuracy, precision, recall, and Macro-F1. For each
 | ai_generated | 0.9148 | 0.7300 | 0.8120 |
 | ai_refined | 0.6958 | 0.7960 | 0.7425 |
 
+#### Confusion Matrix:
+
 ![Confusion Matrix](/images/confmatrix_tf-idftruncated.png)
 
-* Brief escription:
+#### Notes
+
+* 
 
 ### For Frozen RoBERTa with a truncation limit of 256:
 
@@ -65,9 +72,13 @@ For each model, we looked at accuracy, precision, recall, and Macro-F1. For each
 | ai_generated | 0.9880 | 0.8260 | 0.8998 |
 | ai_refined | 0.7795 | 0.9120 | 0.8406 |
 
+#### Confusion Matrix:
+
 ![Confusion Matrix](/images/confmatrix_bert256.png)
 
-* Brief escription:
+#### Notes
+
+* 
 
 ### For Frozen RoBERTa with a truncation limit of 512:
 
@@ -85,8 +96,13 @@ For each model, we looked at accuracy, precision, recall, and Macro-F1. For each
 | ai_generated | 0.9776   | 0.9600   | 0.9687 |
 | ai_refined | 0.8322   | 0.9420 |   0.8837  |
 
+#### Confusion Matrix:
+
 ![Confusion Matrix](images/confmatrix_bert512.png)
 
-* Brief escription:
+#### Notes
 
+* 
+
+### Comparative Notes
 Comparison between 3 models, describe strengths and weaknesses of each. Explain possible reasons.
