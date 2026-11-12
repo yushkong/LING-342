@@ -3,7 +3,12 @@
 For each model, we looked at accuracy, precision, recall, and Macro-F1.
 * Justify why these metrics were chosen
 
-For the TF-IDF Logistic Regression model, we found:
+For the non-truncated TF-IDF Logistic Regression model, we found:
+* Table:
+* Confusion matrix:
+* Brief escription:
+
+For the truncated TF-IDF Logistic Regression model, we found:
 * Table:
 * Confusion matrix:
 * Brief escription:

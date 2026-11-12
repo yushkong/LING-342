@@ -8,5 +8,5 @@ The `.md` files `milestone5.md` and `milestone6.md` contain reports for quantita
 
 For our baselines we used 2 approaches: Lexical and Contextual. The descriptions of the baselines we used is as follows:
 
-* TF-IDF baseline: converts text into TF-IDF-weighted lexical features, followed by Logistic Regression. This does not have a token limit.
-* Frozen RoBERTa: extracts contextual representations from a pretrained RoBERTa model without updating its parameters, followed by a trained classifier. BERT has a 512-token limit, so the input to RoBERTa needs to be truncated. As a result, we include two RoBERTa baseline models with different truncation limits: 256 and 512. 
+* **TF-IDF baseline**: converts text into TF-IDF-weighted lexical features, followed by Logistic Regression. This does not have a token limit. For ease of comparison, since our second approach does require truncation, we included a truncated and non-truncated version of this model.
+* **Frozen RoBERTa**: extracts contextual representations from a pretrained RoBERTa model without updating its parameters, followed by a trained classifier. BERT has a 512-token limit, so the input to RoBERTa needs to be truncated. As a result, we include two RoBERTa baseline models with different truncation limits: 256 and 512. 
