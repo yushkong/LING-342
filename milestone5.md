@@ -16,7 +16,7 @@ For the non-truncated TF-IDF Logistic Regression model, we found:
 | ai_refined | 0.8563 | 0.7450 | 0.7968  |
 | weighted avg | 0.8656 | 0.8657 | 0.8637 |
 
-![Confuction Matrix](images\confmatrix_tf-idfbaseline.png)
+![Confusion Matrix]("images\confmatrix_tf-idfbaseline.png")
 
 * Brief escription:
 
