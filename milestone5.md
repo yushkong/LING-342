@@ -23,7 +23,9 @@ For each model, we looked at accuracy, precision, recall, and Macro-F1. For each
 | ai_generated | 0.9144 | 0.9555 | 0.9345 |
 | ai_refined | 0.8563 | 0.7450 | 0.7968  |
 
-![Confusion Matrix]("images\confmatrix_tf-idfbaseline.png")
+
+
+![Confusion Matrix](/images/confmatrix_tf-idfbaseline.png)
 
 * Brief 
 
@@ -43,7 +45,7 @@ For each model, we looked at accuracy, precision, recall, and Macro-F1. For each
 | ai_generated | 0.9148 | 0.7300 | 0.8120 |
 | ai_refined | 0.6958 | 0.7960 | 0.7425 |
 
-![Confusion Matrix]("images\confmatrix_tf-idftruncated.png")
+![Confusion Matrix](/images/confmatrix_tf-idftruncated.png)
 
 * Brief escription:
 
@@ -63,7 +65,7 @@ For each model, we looked at accuracy, precision, recall, and Macro-F1. For each
 | ai_generated | 0.9880 | 0.8260 | 0.8998 |
 | ai_refined | 0.7795 | 0.9120 | 0.8406 |
 
-![Confusion Matrix]("images\confmatrix_bert256.png")
+![Confusion Matrix](/images/confmatrix_bert256.png)
 
 * Brief escription:
 
@@ -83,7 +85,7 @@ For each model, we looked at accuracy, precision, recall, and Macro-F1. For each
 | ai_generated | 0.9776   | 0.9600   | 0.9687 |
 | ai_refined | 0.8322   | 0.9420 |   0.8837  |
 
-![Confusion Matrix]("images\confmatrix_bert512.png")
+![Confusion Matrix](images/confmatrix_bert512.png)
 
 * Brief escription:
 
