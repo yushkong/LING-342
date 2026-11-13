@@ -14,15 +14,15 @@ For each model, we looked at accuracy, precision, recall, and Macro-F1. For each
 
 | accuracy | macro-F1 | precision | recall |
 | --- | --- | --- | --- |
-| 0.8657 | 0.8637 | 0.8656 | 0.8657 |
+| 0.8677 | 0.8661 | 0.8675 | 0.8677 |
 
 #### Per-Class:
 
 | | precision | recall | F1-score |
 | --- | --- | --- | --- |
-| human | 0.8263 | 0.8965 | 0.8600 |
-| ai_generated | 0.9144 | 0.9555 | 0.9345 |
-| ai_refined | 0.8563 | 0.7450 | 0.7968  |
+|  human | 0.8289 | 0.8940 | 0.8602 |
+| ai_generated | 0.9212 | 0.9525 | 0.9366 |
+| ai_refined | 0.8524 | 0.7565 | 0.8016 |
 
 #### Confusion Matrix:
 
@@ -30,10 +30,10 @@ For each model, we looked at accuracy, precision, recall, and Macro-F1. For each
 
 #### Notes
 
-* The model achieved an accuracy of 86.57% and a macro-F1 of 0.8637, indicating reasonably strong performance across the three classes.
-* It performed best on AI-generated text (F1 = 0.9345), with a recall of 95.55%. This suggests that the model is particularly effective at recognizing fully AI-generated text when it has access to the complete passage.
-* The weakest class was AI-refined (F1 = 0.7968), with a recall of only 74.50%. Of the 2,000 AI-refined examples, 364 were classified as human and 146 as AI-generated.
-* Very few human or AI-generated examples were confused with one another (33 human -> AI-generated and 13 AI-generated -> human). Most errors involved the AI-refined class. One possible explanation is that TF-IDF relies primarily on lexical information, which may be insufficient to distinguish AI-refined writing from its human-written or fully AI-generated counterparts. The model may recognize vocabulary patterns associated with AI-generated text without capturing the subtler stylistic changes introduced by AI refinement.
+* The model achieved an accuracy of 86.77% and a macro-F1 of 0.8661, indicating reasonably strong performance across the three classes.
+* It performed best on AI-generated text (F1 = 0.9366) with a recall of 95.25%. This suggests that the model is particularly effective at recognizing fully AI-generated text when it has access to the complete passage.
+* The weakest class was AI-refined (F1 = 0.8016), with a recall of only 75.65%. Of the 2,000 AI-refined examples, 354 were classified as human and 133 as AI-generated.
+* Very few human or AI-generated examples were confused with one another (30 human -> AI-generated and 15 AI-generated -> human). Most errors involved the AI-refined class. One possible explanation is that TF-IDF relies primarily on lexical information, which may be insufficient to distinguish AI-refined writing from its human-written or fully AI-generated counterparts. The model may recognize vocabulary patterns associated with AI-generated text without capturing the subtler stylistic changes introduced by AI refinement.
 
 ### For the truncated TF-IDF Logistic Regression model:
 
@@ -41,15 +41,15 @@ For each model, we looked at accuracy, precision, recall, and Macro-F1. For each
 
 | accuracy | macro-F1 | precision | recall |
 | --- | --- | --- | --- |
-| 0.7947 | 0.7961 | 0.8072 | 0.7947 |
+| 0.7947 | 0.7960 | 0.8070 | 0.7947 |
 
 #### Per-Class:
 
 | | precision | recall | F1-score |
 | --- | --- | --- | --- |
-| human | 0.8110 | 0.8580 | 0.8338 |
-| ai_generated | 0.9148 | 0.7300 | 0.8120 |
-| ai_refined | 0.6958 | 0.7960 | 0.7425 |
+| human | 0.8109 | 0.8660 | 0.8375 |
+| ai_generated | 0.9146 | 0.7280 | 0.8107 |
+| ai_refined | 0.6954 | 0.7900 | 0.7397 |
 
 #### Confusion Matrix:
 
@@ -57,10 +57,10 @@ For each model, we looked at accuracy, precision, recall, and Macro-F1. For each
 
 #### Notes
 
-* The truncated TF-IDF model achieved an accuracy of 79.47% and a macro-F1 of 0.7961, lower than the non-truncated model's 86.57% accuracy and 0.8637 macro-F1.
-* The largest difference to the non-truncated model was in AI-generated recall, which decreased from 95.55% to 73.00%. Of the 500 AI-generated examples, 109 were incorrectly classified as AI-refined.
-* Contrastively, AI-refined recall increased from 74.50% to 79.60%, although its precision decreased substantially from 85.63% to 69.58%. This suggests that the model predicts the AI-refined class more broadly, identifying more actual AI-refined examples but also incorrectly assigning more other texts to this class.
-* Like the non-truncated model, this one distinguished human-written and AI-generated text relatively well, with only 6 human -> AI-generated and 26 AI-generated -> human errors. 
+* The truncated TF-IDF model achieved an accuracy of 79.47% and a macro-F1 of 0.7960, lower than the non-truncated model.
+* The largest difference to the non-truncated model was in AI-generated recall, which decreased from 95.25% to 72.80%. Of the 500 AI-generated examples, 112 were incorrectly classified as AI-refined.
+* Contrastively, AI-refined recall increased from 75.65% to 79.00%, although its precision decreased substantially from 85.24% to 69.54%. This suggests that the model predicts the AI-refined class more broadly, identifying more actual AI-refined examples but also incorrectly assigning more other texts to this class.
+* Like the non-truncated model, this one distinguished human-written and AI-generated text relatively well, with only 6 human -> AI-generated and 24 AI-generated -> human errors. 
 * The results make sense with regard to the possibility that truncation removes useful lexical information needed to distinguish the classes. Shorter passages may contain fewer distinctive patterns, causing the model to rely on less discriminative features. However, differences between evaluation subsets could also contribute to the performance gap.
 
 ### For Frozen RoBERTa with a truncation limit of 256:
