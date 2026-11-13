@@ -88,4 +88,45 @@ For future improvements, we could investigate the effects of text structure and 
 ### Frozen RoBERTa with a truncation limit of 512:
 
 #### Correct examples
-#### Inorrect examples
+1. **AI-generated (Pair 36860):** AI-generated passage explaining cashback websites. The passage uses a highly structured explanatory format, with sections describing how cashback websites work and their additional features. It also contains organized lists and polished transitions, which may have contributed to its identification as AI-generated.
+
+2. **AI-refined (Pair 111402):** AI-refined academic passage discussing Hegel's philosophy. It preserves specialized philosophical terminology and citations while using explanatory transitions such as "Put differently" to clarify complex ideas. This combination of academic content and reformulation may help distinguish AI-refined text.
+
+3. **Human (Pair 111382):** Human-written philosophical passage discussing historical injustices. The text contains argumentative language, direct engagement with other scholars, and formatting irregularities such as broken words and embedded page headers. These features may distinguish it from the more consistently polished AI-generated passages, although some irregularities likely result from document extraction.
+
+#### Incorrect Classifications
+
+1. **Human, classified as AI-generated (Pair 36953):** A human-written passage about military forward-basing. It provides a systematic explanation of the concept, followed by its advantages, risks, and practical examples. Its organized structure may resemble AI-generated explanatory writing.
+
+2. **AI-refined, classified as AI-generated (Pair 36953):** AI-refined version of the same forward-basing passage from the first incorrect example was also classified as AI-generated. Both versions retain similar information and organization despite differences in wording. This suggests that the classifier may rely partly on shared content and structural features rather than distinguishing the writing process.
+
+3. **AI-generated, classified as Human (Pair 38813):** AI-generated passage about places named Caesarea. The passage primarily consists of factual descriptions and geographical lists, resembling conventional encyclopedic content. Its relatively straightforward informational structure may have contributed to the misclassification.
+
+4. **AI-refined, classified as Human (Pair 38999):** AI-refined passage about the film An Ethics Lesson. It preserves much of the original encyclopedia-style structure, including plot summaries, cast lists, and categorical information. This suggests that AI refinement may be difficult to detect when the original formatting and factual content remain largely unchanged.
+
+#### Overall Observations
+
+These examples suggest that the model struggles when different classes share similar vocabulary, structure, and writing styles. Highly organized human-written passages may resemble AI-generated explanations, while AI-refined passages that preserve their original structure may be mistaken for human writing.
+
+Pair 36953 is particularly informative because both the original human-written text and its AI-refined counterpart were classified as AI-generated. This raises the possibility that the model relies partly on shared topical and structural characteristics rather than features specific to authorship.
+
+The correctly classified human example also contains formatting artifacts, suggesting that source-document formatting may influence classification. This warrants further investigation, as such features may not generalize to cleaner real-world text.
+
+For future improvements, we could compare predictions across paired passages, normalize formatting artifacts, and investigate whether additional stylistic or contextual features improve distinctions between the three classes.
+
+
+### Comparative Observations
+
+Across all four models, the most common difficulty was distinguishing AI-refined text from human-written or fully AI-generated text. However, their error patterns reveal differences in how each model approaches classification.
+
+* **Non-truncated TF-IDF:** Performed well at distinguishing human-written from fully AI-generated text but struggled with AI-refined passages. Errors often involved formal academic writing or factual encyclopedic content, suggesting that word-frequency features alone may not adequately distinguish AI refinement.
+
+* **Truncated TF-IDF:** Greater confusion between AI-generated and AI-refined text. Removing portions of the input may have eliminated useful lexical information, making the model more reliant on limited vocabulary and local patterns.
+
+* **Frozen RoBERTa (256 tokens):** Generally handled AI-refined text better than TF-IDF, but sometimes classified both human-written and AI-refined versions of the same passage as AI-generated (e.g., pair 36953). This suggests that contextual embeddings may still be influenced by shared content and structure.
+
+* **Frozen RoBERTa (512 tokens):** Achieved the strongest overall performance and improved recognition of AI-generated and AI-refined text. However, it continued to misclassify some human-written passages as AI-generated, including pair 36953. Longer contextual representations appear beneficial, but do not fully resolve the overlap between classes.
+
+In all, the results suggest that contextual representations outperform purely lexical features, while longer input sequences generally improve classification performance. Nevertheless, all models remain sensitive to similarities in topic, writing style, and structure across classes. Several correctly classified examples also contained formatting or generation artifacts, raising the possibility that models learn dataset-specific cues rather than authorship characteristics.
+
+Future improvements could include fine-tuning RoBERTa, normalizing formatting artifacts, and systematically comparing predictions across paired passages to investigate whether models rely on content rather than writing origin.
