@@ -1,6 +1,6 @@
 This repository provides all code and analysis files for **Team Awesome (Emily Chen 52998994, Yushan Jiang 37847761)**.
 
-In `\milestone5`, please find a fine-tuned RoBERTa model, which serves as our improved model for comparative analysis. The `.md` file `Comparative-Analysis_finetuned.md` contains our report on how the fine-tuned model impacts results.
+In `\milestone7`, please find a fine-tuned RoBERTa model, which serves as our improved model for comparative analysis. The `.md` file `Comparative-Analysis_finetuned.md` contains our report on how the fine-tuned model impacts results.
 
 In `\milestone4`, please find three baseline models based on pre-existing models for discriminiating human-written vs. AI-generated vs. AI-refined texts. 
 
