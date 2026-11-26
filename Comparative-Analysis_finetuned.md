@@ -7,8 +7,6 @@ we looked at accuracy, precision, recall, and Macro-F1. For each class, we looke
 * **Confusion matrices** were added to give a visual representation of the types of errors the models tend towards.
 
 
-### For the non-truncated TF-IDF Logistic Regression model:
-
 #### On Average:
 
 | accuracy | macro-F1 | precision | recall |
@@ -36,7 +34,7 @@ we looked at accuracy, precision, recall, and Macro-F1. For each class, we looke
 
 #### Confusion Matrix:
 
-![Confusion Matrix](/images/confmatrix_bertfnetuned.png)
+![Confusion Matrix](/images/confmatrix_bertfinetuned.png)
 
 #### Notes
 * Overall, this model outperformed all four of our baseline models by a significant margin. Between the fine-tuned RoBERTa and the previously best model (frozen RoBERTa with 512 limit), accuracy improved by 4.34%, macro-F1 improved by 4.28%, precision improved by 3.92%, and recall improved by 4.34%. This suggests that fine-tuning was an effective way to improve the performance of the model.
