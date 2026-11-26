@@ -23,13 +23,13 @@ we looked at accuracy, precision, recall, and Macro-F1. For each class, we looke
 
 #### Comparative table: 
 
-| | accuracy | macro-F1 | precision | recall |
+| model | accuracy | macro-F1 | precision | recall |
 | --- | --- | --- | --- | --- |
 | Non-truncated TF-IDF | 0.8657 | 0.8637 | 0.8656 | 0.8657 |
 | Truncated TF-IDF | 0.7947 | 0.7961 | 0.8072 | 0.7947 |
 | Frozen RoBERTa (256) | 0.8820 | 0.8837 | 0.8937 | 0.8820 |
 | Frozen RoBERTa (512) | 0.9153 | 0.9158 | 0.9208   | 0.9153 |
-| Fine-tuned RoBERTa (512) | 0.9587 | 0.9586 | 0.9600 | 0.9587 |
+| **Fine-tuned RoBERTa (512)** | **0.9587** | **0.9586** | **0.9600** | **0.9587** |
 
 
 #### Confusion Matrix:
@@ -38,9 +38,11 @@ we looked at accuracy, precision, recall, and Macro-F1. For each class, we looke
 
 #### Notes
 * Overall, this model outperformed all four of our baseline models by a significant margin. Between the fine-tuned RoBERTa and the previously best model (frozen RoBERTa with 512 limit), accuracy improved by 4.34%, macro-F1 improved by 4.28%, precision improved by 3.92%, and recall improved by 4.34%. This suggests that fine-tuning was an effective way to improve the performance of the model.
-* more comparative differences for per-class 
+* The AI-refined class achieved an F1-score of 0.9396, compared with 0.8837 for frozen RoBERTa (512) (the previous best performance). This is particularly significant because AI-refined text was consistently one of the most difficult classes for the previous models.
 * Notably, the fine-tuned model has a recall of 100% for AI-generated samples. Alongside a high precision of 97.66% for the AI-generated class, this is extremely promising performance for detecting AI-generated text, although it also suggests that the model is more prone to overgeneralizing rather than undergeneralizing AI-generated texts.
 * There is no longer any confusion between AI-generated and human-written texts (as seen from the confusion matrix, no samples of AI-generated or human-written samples were classed as the other). The only errors now come from classifying AI-refined texts as AI-generated or human-generated, or vice versa. This is significant because it suggests that in a binary classification for AI-generated text, our model will likely perform exceptionally well.
+*  However, while human-written precision was very high (98.70%), recall was lower (91.20%). This indicates that when the model predicts a passage is human-written, it is usually correct, but some genuinely human-written passages are still classified as AI-refined. 
+* 
 
 
 # Qualitative Analysis
