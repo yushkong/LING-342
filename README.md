@@ -6,6 +6,10 @@ In `\milestone4`, please find three baseline models based on pre-existing models
 
 The `.md` files `Quantitative-Analysis_baseline.md` and `Qualitative-Analysis_baseline.md` contain reports for quantitative and qualitative analysis of our baseline models, respectively.
 
+# Improved Model
+
+Our improved model was a fine-tuned version of the Frozen RoBERTa model with a 512-token limit. we selected to base our model on this particular baseline model since it was the highest performing one. Unlike the frozen RoBERTa baseline, which used fixed contextual embeddings with a separate Logistic Regression classifier, the fine-tuned model updates all RoBERTa parameters along with a three-class classification head. This allows the model's contextual representations to adapt directly to the classification task.
+
 # Baseline Models
 
 For our baselines we used 2 approaches: Lexical and Contextual. The descriptions of the baselines we used is as follows:
