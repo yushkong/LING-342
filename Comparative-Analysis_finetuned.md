@@ -105,3 +105,23 @@ For qualitative analysis, we are interested in comparing examples that were clas
 #### Examples that got fixed
 
 #### Examples that got worse
+
+
+## Linguistic Feature Statistics
+![HeatMap](/images/ling-feature_by_prediction.png)
+#### Characteristics
+- We investigated into the major error class in both model (`HMR`, `human-written` mispredicted as `ai-refined`) by illustrating the linguistic feature heatmap comparing to the correctly predicted classes.
+- `HMR` is generally more similar to `human` by Lexical Diversity, Mean Word Length, Bigram Repetition, Sentence Length Variation and the distribution of grammatical word types. High occurrence of proper nouns and named entities is observed in the error class compared to either correctly predicted classes.
+- Compared with correctly predicted human-written texts, `HMR` samples exhibit shorter sentences, fewer subordinate clauses, and less sentence-length variation in both models.
+- HMR does not consistently exhibit linguistic characteristics intermediate between human-written and AI-refined texts. For several features, including proper nouns, named entities, subordinate clauses, and adverbs, HMR exhibits more extreme values than either correctly predicted class. This suggests that classification errors may be associated with atypical human writing characteristics rather than general stylistic similarity to AI-refined content.
+
+#### Difference between Frozen and Fine-tuned Results
+Feature	| Frozen HMR − Human | Fine-tuned HMR − Human
+| --- | --- | --- |
+Proper nouns | +0.86	| +0.32
+Named entities | +0.76 | +0.29
+Subordinate clauses	| −0.53	| −0.25
+Sentence length variation | −0.42 | −0.10
+Adverbs	| −0.44	| −0.24
+Discourse markers | −0.23 | −0.01
+- After fine-tuning, the remaining errors are less distinctive by linguistic features in several domains. It suggests that fine-tuning may improve the classification of entity-rich human-written texts and texts with relatively simple syntactic structures.
