@@ -46,8 +46,22 @@ we looked at accuracy, precision, recall, and Macro-F1. For each class, we looke
 
 
 # Qualitative Analysis
-For qualitative analysis, we are interested in comparing examples that were classified incorrectly for our baseline models, which were then fixed in the new model, and examples that were classed correctly for our baseline models but are now classed incorrectly for our fine-tuned model. 
+For qualitative analysis, we were interested in seeing what types of classifications improved through our improvements. Since our fine-tuned model was based on the frozen RoBERTa model with a truncation limit of 512, our comparative analysis is centred on comparing with that model.
 
-#### Examples that got fixed
+In total 130 samples out of the 1500 total text samples (8.7%) were classified differently by the fine-tuned model. Out of those samples, 97 (74.6%) were a shift from incorrect to correct labels. This suggests a larger shift towards correct than incorrect. 
 
-#### Examples that got worse
+The main shifts were shifts from human to AI-refined (37 samples), and from AI-refined to human (56 samples) or AI-generated (28 samples). This suggests that the most change occured between models in the classification of AI-refined samples. More shifts also occured in the Wiki domain than Academic, likely because.... 
+
+Below we have included some key examples of shifts between the fine-tuned and rozen model.
+
+#### Corrected Predictions
+
+* **From AI-refined to AI-generated (Pair 36852):** The frozen model incorrectly classified an AI-generated passage about the Delahaye 145 racing car as AI-refined, while the fine-tuned model correctly identified it as fully AI-generated. The passage combines factual historical information with polished descriptions such as "rare and sophisticated luxury racing car." This suggests that fine-tuning may help distinguish fully generated encyclopedic writing from AI-refined text, even when both share similar stylistic features.
+
+* **From Human to AI-refined (Pair 109846):** An AI-refined academic passage discussing universalism and Bourdieu was classified as human-written by the frozen model but correctly identified after fine-tuning. The passage contains specialized terminology, citations, and complex arguments typical of human academic writing. This improvement suggests that fine-tuning may help the model recognize AI refinement without relying solely on surface characteristics such as academic vocabulary or formal style.
+
+#### Newly Introduced Errors
+
+* **From Human to AI-refined (Pair 109722):** A human-written academic passage discussing Munch's artwork was correctly classified by the frozen model but incorrectly classified as AI-refined by the fine-tuned model, with a confidence score of 0.99. The text contains direct quotations, citations, and formatting artifacts from document extraction. The high-confidence error raises the possibility that fine-tuning may overemphasize certain academic or structural features associated with AI refinement.
+
+* **From AI-refined to AI-generated (Pair 38782):** An AI-refined passage about Santa Maria Navarrese was correctly classified by the frozen model but incorrectly classified as fully AI-generated after fine-tuning, with a confidence score near 1.00. The passage uses polished descriptive expressions such as "picturesque coastal and tourist town." This suggests that fine-tuning may sometimes associate highly fluent or embellished writing with full AI generation, even when the text originated from human writing that was subsequently refined.
