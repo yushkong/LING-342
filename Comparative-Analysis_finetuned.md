@@ -37,12 +37,66 @@ we looked at accuracy, precision, recall, and Macro-F1. For each class, we looke
 ![Confusion Matrix](/images/confmatrix_bertfinetuned.png)
 
 #### Notes
-* Overall, this model outperformed all four of our baseline models by a significant margin. Between the fine-tuned RoBERTa and the previously best model (frozen RoBERTa with 512 limit), accuracy improved by 4.34%, macro-F1 improved by 4.28%, precision improved by 3.92%, and recall improved by 4.34%. This suggests that fine-tuning was an effective way to improve the performance of the model.
+* Overall, this model outperformed all four of our baseline models by a significant margin. Between the fine-tuned RoBERTa and the previously best model (frozen RoBERTa with 512 truncation limit), accuracy improved by 4.34%, macro-F1 improved by 4.28%, precision improved by 3.92%, and recall improved by 4.34%. This suggests that fine-tuning was an effective way to improve the performance of the model.
 * The AI-refined class achieved an F1-score of 0.9396, compared with 0.8837 for frozen RoBERTa (512) (the previous best performance). This is particularly significant because AI-refined text was consistently one of the most difficult classes for the previous models.
 * Notably, the fine-tuned model has a recall of 100% for AI-generated samples. Alongside a high precision of 97.66% for the AI-generated class, this is extremely promising performance for detecting AI-generated text, although it also suggests that the model is more prone to overgeneralizing rather than undergeneralizing AI-generated texts.
 * There is no longer any confusion between AI-generated and human-written texts (as seen from the confusion matrix, no samples of AI-generated or human-written samples were classed as the other). The only errors now come from classifying AI-refined texts as AI-generated or human-generated, or vice versa. This is significant because it suggests that in a binary classification for AI-generated text, our model will likely perform exceptionally well.
 *  However, while human-written precision was very high (98.70%), recall was lower (91.20%). This indicates that when the model predicts a passage is human-written, it is usually correct, but some genuinely human-written passages are still classified as AI-refined. 
-* 
+* Misclassifications of AI-refined texts as AI-generated increase from 9 to 12. This indicates that fine-tuning may improve the separation between human and AI-assisted writing while sometimes making it more difficult to distinguish refined texts from fully generated texts.
+
+
+#### Per-domain: 
+| Domain | Class | Frozen recall | Fine-tuned recall |
+| --- | --- | --- | --- |
+| Academic | Human | 96.0% | 93.2% |
+| Academic | AI-generated |	100% | 100% |
+| Academic | AI-refined	| 91.2%	| 96.4%	|
+| Wiki | Human | 72.8% | 89.2% |
+| Wiki | AI-generated | 92.0% | 100% |
+| Wiki | AI-refined	| 97.2%	| 96.4%	|
+
+#### Notes
+- The greatest improvement occurs in human-written Wikipedia articles, where recall increases from 72.8% to 89.2%. In contrast, the performance on human-written academic texts decreases slightly.
+- This suggests that fine-tuning is particularly effective at learning features of encyclopedic writing. However, it may introduce a trade-off in identifying human-written academic texts.
+
+#### Prediction Agreement and Statistical Significance:
+| | texts |	share |
+| --- | --- | --- |
+|both correct| 1341	| 0.8940 |
+only fine-tuned correct	| 97 | 0.0647
+only frozen correct	| 32 | 0.0213
+both wrong | 30 | 0.0200
+of which wrong in different ways | 1 | 0.0007
+
+Statistical test | Result
+| --- | --- |
+Exact McNemar test (overall) |	p = 8.499 × 10⁻⁹
+McNemar test (Academic)	| p = 0.405
+McNemar test (Wiki)	| p = 4.45 × 10⁻¹⁰
+Accuracy improvement, 95% bootstrap CI	| [0.0300, 0.0587]
+Macro-F1 improvement, 95% bootstrap CI	| [0.0296, 0.0579]
+
+#### Notes
+- The models assign different labels to 130 samples, among which the fine-tuned model correctly predicts 97 and the frozen model correctly predicts 32. Only one sample is wrongly assigned by both model.
+- The paired bootstrap intervals exclude zero, suggesting that the improvement is unlikely to result only from test-set sampling variability.
+- The domain-specific McNemar results also suggest that the improvement is concentrated in Wiki texts rather than Academic texts.
+
+#### Formatting Shortcut and Robustness Test:
+Formatting feature	| Human	| AI-generated	| AI-refined
+| --- | --- | --- | --- |
+Duplicated leading title | 0% | 18.0% | 0%
+Contains asterisks	| 1.4%	| 0.2%	| 19.6%
+Contains hash symbols | 0%	| 0% | 2.0%
+Average word count | 295.5 | 282.3 | 252.9
+
+Metric| Original | Normalized
+| --- | --- | --- |
+Accuracy | 0.9587 | 0.9573
+Macro-F1 | 0.9586 | 0.9572
+
+#### Notes
+- We investigated whether the classifier relies on formatting features by applying simple normalization removing certain formats and re-evaluated with the trained model.
+- The reported macro-F1 decrease is only approximately 0.0013 using the underlying unrounded scores, suggesting that the improved performance relies little on the formatting.
 
 
 # Qualitative Analysis
