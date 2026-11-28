@@ -43,6 +43,24 @@ we looked at accuracy, precision, recall, and Macro-F1. For each class, we looke
 * There is no longer any confusion between AI-generated and human-written texts (as seen from the confusion matrix, no samples of AI-generated or human-written samples were classed as the other). The only errors now come from classifying AI-refined texts as AI-generated or human-generated, or vice versa. This is significant because it suggests that in a binary classification for AI-generated text, our model will likely perform exceptionally well.
 *  However, while human-written precision was very high (98.70%), recall was lower (91.20%). This indicates that when the model predicts a passage is human-written, it is usually correct, but some genuinely human-written passages are still classified as AI-refined. 
 
+#### Formatting Shortcut and Robustness Test:
+Formatting feature	| Human	| AI-generated	| AI-refined
+| --- | --- | --- | --- |
+Duplicated leading title | 0% | 18.0% | 0%
+Contains asterisks	| 1.4%	| 0.2%	| 19.6%
+Contains hash symbols | 0%	| 0% | 2.0%
+Average word count | 295.5 | 282.3 | 252.9
+
+Metric| Original | Normalized
+| --- | --- | --- |
+Accuracy | 0.9587 | 0.9573
+Macro-F1 | 0.9586 | 0.9572
+
+#### Notes
+- We investigated whether the classifier relies on formatting features by applying simple normalization removing certain formats and re-evaluated with the trained model.
+- The reported macro-F1 decrease is only approximately 0.0013 using the underlying unrounded scores, suggesting that the improved performance relies little on the formatting.
+
+
 # Qualitative Analysis
 For qualitative analysis, we were interested in seeing what types of classifications improved through our improvements. Since our fine-tuned model was based on the frozen RoBERTa model with a truncation limit of 512, our comparative analysis is centred on comparing with that model.
 
@@ -67,7 +85,7 @@ Below we have included some key examples of shifts between the fine-tuned and ro
 ## Linguistic Feature Statistics
 ![HeatMap](/images/ling-feature_by_prediction.png)
 #### Characteristics
-- We investigated into the major error class in both model (`HMR`, `human-written` mispredicted as `ai-refined`) by illustrating the linguistic feature heatmap comparing to the correctly predicted classes.
+- We investigated into the major error class of both models (`HMR`, `human-written` mispredicted as `ai-refined`) by illustrating the linguistic feature heatmap comparing to the correctly predicted classes.
 - `HMR` is generally more similar to `human` by Lexical Diversity, Mean Word Length, Bigram Repetition, Sentence Length Variation and the distribution of grammatical word types. High occurrence of proper nouns and named entities is observed in the error class compared to either correctly predicted classes.
 - Compared with correctly predicted human-written texts, `HMR` samples exhibit shorter sentences, fewer subordinate clauses, and less sentence-length variation in both models.
 - HMR does not consistently exhibit linguistic characteristics intermediate between human-written and AI-refined texts. For several features, including proper nouns, named entities, subordinate clauses, and adverbs, HMR exhibits more extreme values than either correctly predicted class. This suggests that classification errors may be associated with atypical human writing characteristics rather than general stylistic similarity to AI-refined content.
